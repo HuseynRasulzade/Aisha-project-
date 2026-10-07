@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f8f9d">
+  <title>Dashboard — Sakina</title>
+  <meta name="description" content="Your daily check-in, streaks and weekly mood overview.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="dashboard">
+<div id="app-header"></div>
+
+<main>
+  <section class="page-head">
+    <p class="eyebrow">Dashboard</p>
+    <h1>How are you feeling today?</h1>
+    <p class="muted">A quick check-in helps you notice patterns over time.</p>
+  </section>
+
+  <section class="panel">
+    <div class="moods" id="moods" data-dyn></div>
+    <p id="moodMsg" class="muted center" aria-live="polite" data-dyn></p>
+  </section>
+
+  <section class="section tight">
+    <div class="grid g4 stat-cards" id="statCards" data-dyn></div>
+  </section>
+
+  <section class="section tight">
+    <h2>This week</h2>
+    <div class="panel">
+      <div class="bars" id="weekBars" data-dyn></div>
+      <p class="muted small center">Taller bars mean a better day.</p>
+    </div>
+  </section>
+
+  <section class="card-stack">
+    <article class="info"><div class="info-h"><i data-icon="chart"></i><h3>Your mood trend</h3></div>
+      <p class="muted" id="trendTxt" data-dyn></p></article>
+    <article class="info dark"><div class="info-h"><i data-icon="sparkles"></i><h3>Weekly summary</h3></div>
+      <p id="sumTxt" data-dyn></p>
+      <a class="btn btn-lite" href="more.html#reports">Open reports</a></article>
+    <article class="info"><div class="info-h"><i data-icon="activity"></i><h3>Your patterns</h3></div>
+      <p class="muted">Log your mood and sleep for a few days to see how they connect.</p></article>
+  </section>
+
+  <section class="tile-groups">
+    <h2 class="gt">Notebook</h2>
+    <div class="tiles">
+      <a class="tile" href="diary.html"><span class="te">📖</span><span class="tl">Journal</span></a>
+      <a class="tile" href="diary.html#gratitude"><span class="te">💗</span><span class="tl">Gratitude</span></a>
+      <a class="tile" href="diary.html"><span class="te">🧠</span><span class="tl">Reframe</span></a>
+      <a class="tile" href="diary.html#habits"><span class="te">🎯</span><span class="tl">Habits</span></a>
+      <a class="tile" href="health.html#meds"><span class="te">✅</span><span class="tl">Planner</span></a>
+    </div>
+    <h2 class="gt">Calm</h2>
+    <div class="tiles">
+      <a class="tile" href="calm.html#chat"><span class="te">💬</span><span class="tl">Chat</span></a>
+      <a class="tile" href="calm.html#breathing"><span class="te">🌬️</span><span class="tl">Breathing</span></a>
+      <a class="tile" href="calm.html#meditation"><span class="te">🧘</span><span class="tl">Meditation</span></a>
+      <a class="tile" href="calm.html#sounds"><span class="te">🎵</span><span class="tl">Sounds</span></a>
+      <a class="tile" href="calm.html#meditation"><span class="te">🌙</span><span class="tl">Sleep wind-down</span></a>
+    </div>
+    <h2 class="gt">Health</h2>
+    <div class="tiles">
+      <a class="tile" href="health.html"><span class="te">💧</span><span class="tl">Water & sleep</span></a>
+      <a class="tile" href="health.html#meds"><span class="te">💊</span><span class="tl">Medication</span></a>
+      <a class="tile" href="health.html#cycle"><span class="te">📅</span><span class="tl">Cycle</span></a>
+      <a class="tile" href="health.html#yoga"><span class="te">🤸</span><span class="tl">Yoga</span></a>
+    </div>
+    <h2 class="gt">Grow & learn</h2>
+    <div class="tiles">
+      <a class="tile" href="more.html#programs"><span class="te">🎓</span><span class="tl">Programs</span></a>
+      <a class="tile" href="more.html#challenges"><span class="te">🏆</span><span class="tl">Challenges</span></a>
+      <a class="tile" href="more.html#assessments"><span class="te">📋</span><span class="tl">Assessments</span></a>
+      <a class="tile" href="more.html#library"><span class="te">📚</span><span class="tl">Library</span></a>
+      <a class="tile" href="more.html#safety"><span class="te">🛡️</span><span class="tl">Safety plan</span></a>
+      <a class="tile" href="more.html#reports"><span class="te">📊</span><span class="tl">Reports</span></a>
+    </div>
+  </section>
+</main>
+
+<div id="app-footer"></div>
+<script src="i18n.js"></script>
+<script src="i18n-pages.js"></script>
+<script src="common.js"></script>
+<script src="pages.js"></script>
+</body>
+</html>

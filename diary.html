@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f8f9d">
+  <title>Diary — Sakina</title>
+  <meta name="description" content="Journal, gratitude and habits in one private notebook.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="diary">
+<div id="app-header"></div>
+
+<main>
+  <section class="page-head">
+    <p class="eyebrow">Notebook</p>
+    <h1>Write and reflect</h1>
+    <p class="muted">Everything is saved privately on this device.</p>
+  </section>
+
+  <div class="tabs" role="tablist">
+    <button class="on" data-tab="journal"><i data-icon="pencil"></i>Journal</button>
+    <button data-tab="gratitude"><i data-icon="heart"></i>Gratitude</button>
+    <button data-tab="habits"><i data-icon="target"></i>Habits</button>
+  </div>
+
+  <section class="tabpanel on" id="tab-journal">
+    <div class="panel">
+      <label class="lbl">How do you feel?</label>
+      <div class="mood-mini" id="jMood" data-dyn></div>
+      <label class="lbl" for="jText">What is on your mind?</label>
+      <textarea id="jText" rows="5" data-ph="Write freely. No one else will read this."></textarea>
+      <button class="btn btn-dark" id="jSave">Save entry</button>
+    </div>
+    <h2 class="sub">Past entries</h2>
+    <div id="jList" class="list" data-dyn></div>
+  </section>
+
+  <section class="tabpanel" id="tab-gratitude">
+    <div class="panel">
+      <p class="muted">Name three things, big or small, that you appreciate today.</p>
+      <input class="inp" id="g1" data-ph="I am grateful for…">
+      <input class="inp" id="g2" data-ph="I am grateful for…">
+      <input class="inp" id="g3" data-ph="I am grateful for…">
+      <button class="btn btn-dark" id="gSave">Save</button>
+    </div>
+    <h2 class="sub">Past gratitude</h2>
+    <div id="gList" class="list" data-dyn></div>
+  </section>
+
+  <section class="tabpanel" id="tab-habits">
+    <div class="panel row-form">
+      <input class="inp" id="hName" data-ph="New habit, e.g. 10-minute walk">
+      <button class="btn btn-dark" id="hAdd"><i data-icon="plus"></i>Add</button>
+    </div>
+    <div id="hList" class="list" data-dyn></div>
+  </section>
+</main>
+
+<div id="app-footer"></div>
+<script src="i18n.js"></script>
+<script src="i18n-pages.js"></script>
+<script src="common.js"></script>
+<script src="pages.js"></script>
+</body>
+</html>

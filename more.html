@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f8f9d">
+  <title>More — Sakina</title>
+  <meta name="description" content="Programs, challenges, assessments, library, safety plan, reports and FAQ.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="more">
+<div id="app-header"></div>
+
+<main>
+  <section class="page-head">
+    <p class="eyebrow">Growth &amp; awareness</p>
+    <h1>Learn and measure progress</h1>
+    <p class="muted">Programs, self-checks and your personal safety plan.</p>
+  </section>
+
+  <div class="tabs scroll" role="tablist">
+    <button class="on" data-tab="programs"><i data-icon="compass"></i>Programs</button>
+    <button data-tab="challenges"><i data-icon="award"></i>Challenges</button>
+    <button data-tab="assessments"><i data-icon="clipboard"></i>Assessments</button>
+    <button data-tab="library"><i data-icon="library"></i>Library</button>
+    <button data-tab="safety"><i data-icon="shield"></i>Safety plan</button>
+    <button data-tab="reports"><i data-icon="chart"></i>Reports</button>
+    <button data-tab="faq"><i data-icon="help"></i>FAQ</button>
+  </div>
+
+  <section class="tabpanel on" id="tab-programs"><div class="grid g2" id="progList" data-dyn></div></section>
+  <section class="tabpanel" id="tab-challenges"><div class="list" id="chalList" data-dyn></div></section>
+
+  <section class="tabpanel" id="tab-assessments">
+    <div class="panel">
+      <h3>PHQ-9</h3>
+      <p class="muted">Over the last 2 weeks, how often have you been bothered by the following problems?</p>
+      <form id="phqForm" data-dyn></form>
+      <p id="phqOut" class="result" data-dyn></p>
+      <p class="muted small">A self-check is not a diagnosis. Please talk to a professional about your results.</p>
+    </div>
+  </section>
+
+  <section class="tabpanel" id="tab-library"><div class="grid g2" id="libList" data-dyn></div></section>
+
+  <section class="tabpanel" id="tab-safety">
+    <div class="panel">
+      <p class="muted">Write this when you feel well, so it is ready when you do not.</p>
+      <label class="lbl" for="sp1">My warning signs</label>
+      <textarea id="sp1" rows="2"></textarea>
+      <label class="lbl" for="sp2">Things that help me cope</label>
+      <textarea id="sp2" rows="2"></textarea>
+      <label class="lbl" for="sp3">People I can contact</label>
+      <textarea id="sp3" rows="2"></textarea>
+      <label class="lbl" for="sp4">Places where I feel safe</label>
+      <textarea id="sp4" rows="2"></textarea>
+      <button class="btn btn-dark" id="spSave">Save plan</button>
+      <p id="spOut" class="result" data-dyn></p>
+    </div>
+    <div class="panel alert-box">
+      <i data-icon="alert"></i>
+      <p>If you are in immediate danger, contact your local emergency number right now.</p>
+    </div>
+  </section>
+
+  <section class="tabpanel" id="tab-reports"><div id="repOut" data-dyn></div></section>
+
+  <section class="tabpanel" id="tab-faq">
+    <div class="faq">
+      <details><summary>Is it really free?</summary><p>Yes. All tools are free, with no subscription and no ads.</p></details>
+      <details><summary>Is my data private?</summary><p>Data is stored encrypted, your journal can be locked, and nothing is sold or shared.</p></details>
+      <details><summary>Can it replace therapy?</summary><p>No. It supports daily self-care and works alongside professional help.</p></details>
+      <details><summary>Do I need an account?</summary><p>No. Use it as a guest, and create an account only if you want to sync devices.</p></details>
+      <details><summary>Can I install it on my phone?</summary><p>Yes. Use your browser's "Install app" or "Add to Home Screen" option.</p></details>
+      <details><summary>Which methods does it use?</summary><p>CBT, mindfulness, ACT, breathwork and standard questionnaires.</p></details>
+    </div>
+    <h2 class="sub">Trust &amp; privacy</h2>
+    <ul class="ticks">
+      <li>Your data is encrypted and belongs only to you.</li>
+      <li>No ads, no data sales, no third-party access.</li>
+      <li>A daily support tool, not a substitute for professional care.</li>
+      <li>In a crisis, contact local emergency services right away.</li>
+    </ul>
+  </section>
+</main>
+
+<div id="app-footer"></div>
+<script src="i18n.js"></script>
+<script src="i18n-pages.js"></script>
+<script src="common.js"></script>
+<script src="pages.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f8f9d">
+  <title>Calm — Sakina</title>
+  <meta name="description" content="Empathetic chat, guided breathing, meditation and calming sounds.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="calm">
+<div id="app-header"></div>
+
+<main>
+  <section class="page-head">
+    <p class="eyebrow">Calm</p>
+    <h1>Slow down and breathe</h1>
+    <p class="muted">Pick what your mind needs right now.</p>
+  </section>
+
+  <div class="tabs" role="tablist">
+    <button class="on" data-tab="chat"><i data-icon="chat"></i>Chat</button>
+    <button data-tab="breathing"><i data-icon="wind"></i>Breathing</button>
+    <button data-tab="meditation"><i data-icon="leaf"></i>Meditation</button>
+    <button data-tab="sounds"><i data-icon="waves"></i>Sounds</button>
+  </div>
+
+  <!-- Chat -->
+  <section class="tabpanel on" id="tab-chat">
+    <div class="chat panel">
+      <div class="chat-log" id="chatLog" data-dyn></div>
+      <form class="chat-form" id="chatForm">
+        <input class="inp" id="chatIn" data-ph="Tell me how you are feeling…" autocomplete="off">
+        <button class="btn btn-dark icon-btn" aria-label="Send"><i data-icon="send"></i></button>
+      </form>
+    </div>
+    <p class="muted small center">This is a simple listener demo, not a clinician. In danger? Call your local emergency number.</p>
+  </section>
+
+  <!-- Breathing -->
+  <section class="tabpanel" id="tab-breathing">
+    <div class="panel center">
+      <div class="seg" id="bMode" data-dyn></div>
+      <div class="orb-wrap"><div class="orb" id="orb"></div><div class="orb-count" id="orbCount" data-dyn>·</div></div>
+      <h3 id="bLabel" data-dyn>Ready when you are</h3>
+      <p class="muted" id="bCycles" data-dyn></p>
+      <button class="btn btn-dark" id="bBtn" data-dyn>Start</button>
+    </div>
+  </section>
+
+  <!-- Meditation -->
+  <section class="tabpanel" id="tab-meditation">
+    <div class="grid g2" id="medList" data-dyn></div>
+  </section>
+
+  <!-- Sounds -->
+  <section class="tabpanel" id="tab-sounds">
+    <p class="muted">Tap to play. You can mix more than one.</p>
+    <div class="grid g2" id="soundList" data-dyn></div>
+  </section>
+</main>
+
+<div id="app-footer"></div>
+<script src="i18n.js"></script>
+<script src="i18n-pages.js"></script>
+<script src="common.js"></script>
+<script src="pages.js"></script>
+</body>
+</html>

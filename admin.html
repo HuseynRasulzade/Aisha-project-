@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f8f9d">
+  <title>Moderation — Sakina</title>
+  <meta name="description" content="AI moderation notifications.">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <script src="gate.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="admin">
+<div id="app-header"></div>
+
+<main>
+  <section class="page-head">
+    <p class="eyebrow">Admin</p>
+    <h1>Moderation panel</h1>
+    <p class="muted" id="adminSub" data-dyn>AI notifications about removed and flagged community content.</p>
+  </section>
+  <div id="denied" class="panel" hidden><p>You do not have access to this page.</p></div>
+  <section id="adminBody" hidden>
+    <div class="grid g4 stat-cards" id="adminStats" data-dyn></div>
+    <div class="seg" id="adminFilter" data-dyn></div>
+    <div class="list" id="modList" data-dyn></div>
+  </section>
+</main>
+<div class="toast" id="toast" hidden></div>
+
+<div id="app-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="i18n.js"></script>
+<script src="i18n-pages.js"></script>
+<script src="i18n-ai.js"></script>
+<script src="common.js"></script>
+<script src="auth.js"></script>
+<script src="admin.js"></script>
+<script src="pages.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Sakina logo">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f3a54"/><stop offset="1" stop-color="#2f8f9d"/></linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#g)"/>
+  <!-- lotus: three petals over calm waves -->
+  <path d="M32 14c6 6 8 13 0 24-8-11-6-18 0-24z" fill="#fff"/>
+  <path d="M19 22c8 1 13 6 13 16-9 0-14-5-13-16z" fill="#fff" opacity=".78"/>
+  <path d="M45 22c-8 1-13 6-13 16 9 0 14-5 13-16z" fill="#fff" opacity=".78"/>
+  <path d="M15 46q4.25 3 8.5 0t8.5 0 8.5 0 8.5 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+</svg>

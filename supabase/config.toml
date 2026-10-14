@@ -1,0 +1,7 @@
+project_id = "sakina"
+
+[functions.generate-plan]
+verify_jwt = true
+
+[functions.community]
+verify_jwt = true

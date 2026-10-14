@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f3a54">
+  <title>Sign up — Sakina</title>
+  <meta name="description" content="Free and private. Takes less than a minute.">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="signup">
+<div id="app-header"></div>
+
+<main class="auth-split">
+  <aside class="auth-side">
+    <span class="orb-deco o1"></span><span class="orb-deco o2"></span>
+    <a class="brand" href="login.html"><svg class="brand-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Sakina logo">
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f3a54"/><stop offset="1" stop-color="#2f8f9d"/></linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#lg)"/>
+  <!-- lotus: three petals over calm waves -->
+  <path d="M32 14c6 6 8 13 0 24-8-11-6-18 0-24z" fill="#fff"/>
+  <path d="M19 22c8 1 13 6 13 16-9 0-14-5-13-16z" fill="#fff" opacity=".78"/>
+  <path d="M45 22c-8 1-13 6-13 16 9 0 14-5 13-16z" fill="#fff" opacity=".78"/>
+  <path d="M15 46q4.25 3 8.5 0t8.5 0 8.5 0 8.5 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+</svg>
+<span>Sakina</span></a>
+    <div class="side-copy">
+      <h2>Your calm, in your pocket.</h2>
+      <p>A gentle space for stress, sleep and self-understanding, with an AI coach who builds a personal 7-day plan for you.</p>
+      <ul>
+        <li><i data-icon="sparkles"></i>Personal 7-day plan from Aisha</li>
+        <li><i data-icon="lock"></i>Private and encrypted</li>
+        <li><i data-icon="leaf"></i>Breathing, journal and meditation</li>
+      </ul>
+    </div>
+    <p class="side-note">Sakina is a self-help tool and does not replace a licensed professional.</p>
+  </aside>
+
+  <section class="auth-main">
+    <div class="auth-box">
+      <p class="eyebrow">Sign up</p>
+      <h1>Create your account</h1>
+      <p class="muted">Free and private. Takes less than a minute.</p>
+      <form id="authForm" novalidate>
+        <label class="lbl" for="fullName">Your name</label>
+        <input class="inp" id="fullName" type="text" autocomplete="name" maxlength="60" required>
+        <label class="lbl" for="email">Email</label>
+        <input class="inp" id="email" type="email" autocomplete="email" required>
+        <label class="lbl" for="password">Password</label>
+        <div class="pw">
+          <input class="inp" id="password" type="password" autocomplete="new-password" minlength="6" required>
+          <button type="button" class="pw-btn" id="pwToggle">Show</button>
+        </div>
+        <button class="btn btn-dark btn-block" type="submit">Create account</button>
+        <p id="authMsg" class="form-msg" aria-live="polite" data-dyn></p>
+      </form>
+      <p class="muted center auth-alt">Already have an account? <a href="login.html">Log in</a></p>
+    </div>
+  </section>
+</main>
+
+<div id="app-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="i18n.js"></script>
+<script src="i18n-pages.js"></script>
+<script src="i18n-ai.js"></script>
+<script src="common.js"></script>
+<script src="auth.js"></script>
+<script src="auth-pages.js"></script>
+<script src="pages.js"></script>
+</body>
+</html>

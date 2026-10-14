@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f8f9d">
+  <title>AI Assistant — Sakina</title>
+  <meta name="description" content="Tell Aisha what you are struggling with and get a personal 7-day action plan.">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <script src="gate.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="assistant">
+<div id="app-header"></div>
+
+<main>
+  <section class="page-head">
+    <p class="eyebrow">AI assistant</p>
+    <h1 id="hello" data-dyn>Hi, I am Aisha</h1>
+    <p class="muted">Share what is on your mind. I will turn it into a gentle 7-day plan made just for you.</p>
+  </section>
+
+  <section class="panel" id="intake">
+    <h3>What are you struggling with?</h3>
+    <p class="muted small">Add one or more personal problems, in your own words.</p>
+    <div class="chips suggest" id="suggest" data-dyn></div>
+    <form id="probForm" class="prob-form">
+      <textarea id="probIn" rows="2" maxlength="300" data-ph="For example: I do not trust myself."></textarea>
+      <button class="btn btn-soft" type="submit"><i data-icon="plus"></i>Add problem</button>
+    </form>
+    <ul class="prob-list" id="probList" data-dyn></ul>
+    <button class="btn btn-dark btn-block" id="genBtn" type="button" disabled data-dyn>Create my 7-day plan</button>
+    <p id="genMsg" class="form-msg" aria-live="polite" data-dyn></p>
+    <p class="muted small center">Aisha is an AI coach, not a clinician. In danger? Call your local emergency number.</p>
+  </section>
+
+  <section id="planView" hidden></section>
+
+  <section class="section tight" id="historyWrap" hidden>
+    <h2>Your previous plans</h2>
+    <div class="list" id="history" data-dyn></div>
+  </section>
+</main>
+
+<div id="app-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="i18n.js"></script>
+<script src="i18n-pages.js"></script>
+<script src="i18n-ai.js"></script>
+<script src="common.js"></script>
+<script src="auth.js"></script>
+<script src="assistant.js"></script>
+<script src="pages.js"></script>
+</body>
+</html>

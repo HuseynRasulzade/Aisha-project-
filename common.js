@@ -76,6 +76,8 @@ const App = (() => {
     ['home', 'Home', 'index.html', 'home'],
     ['grid', 'Dashboard', 'dashboard.html', 'dashboard'],
     ['book', 'Diary', 'diary.html', 'diary'],
+    ['brain', 'AI Plan', 'assistant.html', 'assistant'],
+    ['users', 'Community', 'community.html', 'community'],
     ['sparkles', 'Calm', 'calm.html', 'calm'],
     ['heartpulse', 'Health', 'health.html', 'health'],
     ['more', 'More', 'more.html', 'more'],

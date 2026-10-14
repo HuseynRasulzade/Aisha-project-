@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f8f9d">
+  <title>You are not alone — Sakina</title>
+  <meta name="description" content="An anonymous, kind peer-support community.">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <script src="gate.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="community">
+<div id="app-header"></div>
+
+<main>
+  <section class="page-head">
+    <p class="eyebrow">Community</p>
+    <h1>You are not alone</h1>
+    <p class="muted">Share what you are going through, anonymously. People with similar experiences will support you.</p>
+  </section>
+
+  <details class="panel rules">
+    <summary><i data-icon="shield"></i>Community rules and your privacy</summary>
+    <ul class="ticks">
+      <li>You appear only under a random nickname. Your name, phone, e-mail and account are never shown to other members.</li>
+      <li>Do not write real names, phone numbers, addresses or links.</li>
+      <li>Support each other. No insults, mockery or judging.</li>
+      <li>No medical, medication or risky advice. Share your own experience instead.</li>
+      <li>Every message is checked by AI. Harmful content is removed and reported to moderators.</li>
+    </ul>
+  </details>
+
+  <section class="panel">
+    <div class="me-line"><span class="av" id="meAv"></span><span>Posting as <strong id="meAlias" data-dyn></strong></span></div>
+    <div class="chips topics" id="topicPick" data-dyn></div>
+    <form id="postForm">
+      <textarea id="postBody" rows="4" maxlength="1000" data-ph="Share your situation anonymously…"></textarea>
+      <div class="post-actions"><small class="muted" id="postCount">0 / 1000</small>
+        <button class="btn btn-dark" type="submit" id="postBtn" data-dyn>Share anonymously</button></div>
+    </form>
+    <p id="postMsg" class="form-msg" aria-live="polite" data-dyn></p>
+    <div class="alert-box" id="crisisBox" hidden><i data-icon="alert"></i><p id="crisisTxt" data-dyn></p></div>
+  </section>
+
+  <div class="tabs scroll" id="topicFilter" data-dyn></div>
+  <section id="feed" class="feed" data-dyn></section>
+  <button class="btn btn-soft btn-block" id="moreBtn" type="button" hidden data-dyn>Load more</button>
+</main>
+
+<div id="app-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="i18n.js"></script>
+<script src="i18n-pages.js"></script>
+<script src="i18n-ai.js"></script>
+<script src="common.js"></script>
+<script src="auth.js"></script>
+<script src="community.js"></script>
+<script src="pages.js"></script>
+</body>
+</html>

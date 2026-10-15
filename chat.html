@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f8f9d">
+  <title>Task chat — Sakina</title>
+  <meta name="description" content="Do your daily task in a conversation with Aisha.">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <script src="gate.js?v=202610152020"></script>
+  <link rel="stylesheet" href="styles.css?v=202610152020">
+</head>
+<body data-page="chat">
+<div id="app-header"></div>
+
+<main>
+  <a class="back-link" id="backLink" href="assistant.html"><i data-icon="send"></i><span>Back to my plan</span></a>
+
+  <section class="panel task-head" id="taskHead" data-dyn></section>
+
+  <div class="chat panel task-chat">
+    <div class="chat-log tall" id="tcLog" data-dyn></div>
+    <div class="quick" id="tcQuick" data-dyn></div>
+    <div class="task-done" id="tcDone" hidden data-dyn></div>
+    <form class="chat-form" id="tcForm">
+      <textarea class="inp" id="tcIn" rows="1" maxlength="1500" data-ph="Write to Aisha…" autocomplete="off"></textarea>
+      <button class="btn btn-dark icon-btn" id="tcSend" aria-label="Send"><i data-icon="send"></i></button>
+    </form>
+  </div>
+  <p class="muted small center" id="tcNote" data-dyn>Aisha is an AI coach, not a clinician. In danger? Call your local emergency number.</p>
+</main>
+
+<div id="app-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js?v=202610152020"></script>
+<script src="i18n.js?v=202610152020"></script>
+<script src="i18n-pages.js?v=202610152020"></script>
+<script src="i18n-ai.js?v=202610152020"></script>
+<script src="common.js?v=202610152020"></script>
+<script src="auth.js?v=202610152020"></script>
+<script src="chat.js?v=202610152020"></script>
+<script src="pages.js?v=202610152020"></script>
+</body>
+</html>

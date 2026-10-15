@@ -5,3 +5,12 @@ verify_jwt = true
 
 [functions.community]
 verify_jwt = true
+
+[functions.task-chat]
+verify_jwt = true
+
+[functions.aisa-chat]
+verify_jwt = true
+
+[functions.discover-map]
+verify_jwt = true

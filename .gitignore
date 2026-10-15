@@ -3,5 +3,3 @@
 .env.*
 supabase/.env
 supabase/.temp/
-.idea/
-node_modules/

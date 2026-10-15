@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f8f9d">
+  <title>AISA AI — Sakina</title>
+  <meta name="description" content="Think through a hard decision with AISA AI: options, priorities, risks and outcomes.">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <script src="gate.js?v=202610152020"></script>
+  <link rel="stylesheet" href="styles.css?v=202610152020">
+</head>
+<body data-page="aisa">
+<div id="app-header"></div>
+
+<main>
+  <nav class="ai-switch"><a href="assistant.html">7-day plan</a><a href="aisa.html" class="on">AISA AI</a></nav>
+
+  <section class="page-head">
+    <p class="eyebrow">AISA AI</p>
+    <h1>Decide with a clear head</h1>
+    <p class="muted">Facing a hard choice? Tell me your options. I will help you see your priorities, risks and outcomes. I never decide for you.</p>
+  </section>
+
+  <section class="panel" id="starter">
+    <h3>What decision are you facing?</h3>
+    <input class="inp" id="dQ" maxlength="200" data-ph="For example: Should I stay in my job or look for a new one?">
+    <label class="lbl">Your options</label>
+    <div id="dOpts" data-dyn></div>
+    <button class="btn btn-soft" type="button" id="dAdd"><i data-icon="plus"></i>Add option</button>
+    <button class="btn btn-dark btn-block" type="button" id="dGo">Analyze with AISA AI</button>
+    <p class="muted small">Or ask in your own words:</p>
+    <div class="chips suggest" id="dSuggest" data-dyn></div>
+  </section>
+
+  <div class="chat panel aisa-chat">
+    <div class="chat-log tall" id="aiLog" data-dyn></div>
+    <div class="quick" id="aiQuick" data-dyn></div>
+    <form class="chat-form" id="aiForm">
+      <textarea class="inp" id="aiIn" rows="1" maxlength="2500" data-ph="Write to AISA AI…" autocomplete="off"></textarea>
+      <button class="btn btn-dark icon-btn" id="aiSend" aria-label="Send"><i data-icon="send"></i></button>
+    </form>
+  </div>
+  <p class="muted small center">AISA AI helps you think. It does not decide for you and is not a substitute for a professional. In danger? Call your local emergency number.</p>
+
+  <section class="section tight">
+    <div class="hist-head"><h2>Your conversations</h2><button class="btn btn-soft" type="button" id="newChat">New conversation</button></div>
+    <div class="list" id="aiHist" data-dyn></div>
+  </section>
+</main>
+
+<div id="app-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js?v=202610152020"></script>
+<script src="i18n.js?v=202610152020"></script>
+<script src="i18n-pages.js?v=202610152020"></script>
+<script src="i18n-ai.js?v=202610152020"></script>
+<script src="common.js?v=202610152020"></script>
+<script src="auth.js?v=202610152020"></script>
+<script src="aisa.js?v=202610152020"></script>
+<script src="pages.js?v=202610152020"></script>
+</body>
+</html>

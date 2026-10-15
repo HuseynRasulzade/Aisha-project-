@@ -46,6 +46,15 @@
   $('probIn').onkeydown = e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); $('probForm').requestSubmit(); } };
 
   // ---------- generate ----------
+  async function fetchPlan(id, tries = 3) {
+    for (let i = 0; i < tries; i++) {
+      const { data, error } = await Auth.sb.rpc('get_plan', { p_id: id });
+      if (!error && data) return data;
+      console.error('get_plan failed', error);
+      if (i < tries - 1) await new Promise(r => setTimeout(r, 1500));
+    }
+    throw new Error('load_failed');
+  }
   $('genBtn').onclick = async () => {
     if (busy || !problems.length) return;
     busy = true; setMsg(''); paintProblems();
@@ -56,23 +65,27 @@
         try { code = (await error.context.json()).error; } catch (e) {}
         throw new Error(code || 'failed');
       }
-      history.unshift(data);
-      show(data);
+      current = await fetchPlan(data.id);
+      await loadHistory();
+      show(current);
       problems = [];
       $('planView').scrollIntoView({ behavior: 'smooth', block: 'start' });
     } catch (e) {
+      console.error('plan creation failed', e);
+      if (e.message === 'load_failed') await loadHistory().catch(() => {});
+      paintHistory();
       setMsg(e.message === 'rate_limited' ? 'Daily limit reached. Please try again tomorrow.'
         : e.message === 'unauthorized' ? 'Your session expired. Please log in again.'
+        : e.message === 'load_failed' ? 'Your plan was created but could not be opened. Reload the page and pick it from your previous plans.'
         : 'Could not create your plan. Please try again.', false);
     } finally {
-      busy = false; paintProblems(); paintHistory();
+      busy = false; paintProblems();
     }
   };
 
   // ---------- plan view ----------
   const WHEN = { morning: 'Morning', afternoon: 'Afternoon', evening: 'Evening' };
-  const doneCount = r => Object.values(r.progress || {}).filter(Boolean).length;
-  const totalTasks = r => r.plan.days.reduce((n, d) => n + d.tasks.length, 0);
+  const taskLink = (r, day, idx) => `chat.html?task=${r.id}.${day}.${idx}`;
 
   const taskMore = k => (k.steps && k.steps.length) || k.why || k.example ? `
     <details class="more"><summary>${esc(t('How to do it'))}</summary>
@@ -81,58 +94,65 @@
       ${k.example ? `<p class="ex"><strong>${esc(t('Example'))}:</strong> ${esc(k.example)}</p>` : ''}
     </details>` : '';
 
+  function taskHtml(r, d, k, ti) {
+    const done = !!k.entry;
+    return `<li class="task ${done ? 'done' : ''}">
+      <span class="tick ${done ? 'on' : ''}">${done ? icon('check') : ''}</span>
+      <div class="t-main">
+        <em class="when">${esc(t(WHEN[k.when] || 'Morning'))} · ${esc(k.minutes)} ${esc(t('min'))}</em>
+        <strong>${esc(k.title)}</strong>
+        ${k.technique ? `<span class="tech">${esc(k.technique)}</span>` : ''}
+        <small>${esc(k.details)}</small>
+        ${taskMore(k)}
+        ${done ? `<details class="more note"><summary>${esc(t('Your answers'))}</summary><p>${esc(k.entry.content)}</p></details>` : ''}
+        <a class="btn ${done ? 'btn-soft' : 'btn-dark'} t-btn" href="${taskLink(r, d.day, ti)}">${esc(t(done ? 'Open conversation' : 'Talk it through with Aisha'))}</a>
+      </div></li>`;
+  }
+
   function show(r) {
     current = r;
-    const p = r.plan;
-    const pct = Math.round(doneCount(r) / Math.max(1, totalTasks(r)) * 100);
+    const pct = Math.round(r.done / Math.max(1, r.total) * 100);
+    const firstOpen = r.days.findIndex(d => !d.done);
     $('planView').hidden = false;
     $('planView').innerHTML = `
       <div class="panel plan-head">
         <p class="eyebrow">${esc(t('Your 7-day plan'))}</p>
-        <p>${esc(p.summary)}</p>
-        ${p.professional_help_note ? `<div class="alert-box"><i>${icon('alert')}</i><p>${esc(p.professional_help_note)}</p></div>` : ''}
-        <div class="focus">${(p.focus_areas || []).map(f => `<div><strong>${esc(f.problem)}</strong><span>${esc(f.approach)}</span></div>`).join('')}</div>
-        <div class="progress" aria-label="${esc(t('Progress'))}"><div class="progress-bar"><i id="pBar" style="width:${pct}%"></i></div><span id="pTxt">${pct}%</span></div>
+        <p>${esc(r.summary)}</p>
+        ${r.professional_help_note ? `<div class="alert-box"><i>${icon('alert')}</i><p>${esc(r.professional_help_note)}</p></div>` : ''}
+        <div class="focus">${(r.focus_areas || []).map(f => `<div><strong>${esc(f.problem)}</strong><span>${esc(f.approach)}</span></div>`).join('')}</div>
+        <div class="progress" aria-label="${esc(t('Progress'))}"><div class="progress-bar"><i style="width:${pct}%"></i></div><span>${r.done}/${r.total}</span></div>
       </div>
-      <div class="days">${p.days.map((d, di) => `
-        <details class="day" ${di === 0 ? 'open' : ''}>
-          <summary><b>${esc(t('Day'))} ${esc(d.day)}</b><span>${esc(d.theme)}</span></summary>
+      <div class="days">${r.days.map((d, di) => `
+        <details class="day ${d.done ? 'finished' : ''}" ${di === firstOpen || (firstOpen < 0 && di === r.days.length - 1) ? 'open' : ''}>
+          <summary><b>${esc(t('Day'))} ${esc(d.day)}</b><span>${esc(d.theme)}</span>${d.done ? `<i class="ok">${icon('check')}</i>` : ''}</summary>
           <p class="goal"><strong>${esc(t('Goal'))}:</strong> ${esc(d.goal)}</p>
           ${d.intro ? `<p class="intro">${esc(d.intro)}</p>` : ''}
-          <ul class="tasks">${d.tasks.map((k, ti) => {
-            const key = di + '-' + ti;
-            return `<li><label><input type="checkbox" data-k="${key}" ${r.progress && r.progress[key] ? 'checked' : ''}>
-              <span><em class="when">${esc(t(WHEN[k.when] || 'Morning'))} · ${esc(k.minutes)} ${esc(t('min'))}</em><strong>${esc(k.title)}</strong><small>${esc(k.details)}</small></span></label>
-              ${taskMore(k)}</li>`;
-          }).join('')}</ul>
+          <ul class="tasks">${d.tasks.map((k, ti) => taskHtml(r, d, k, ti)).join('')}</ul>
           ${(d.tips || []).length ? `<div class="tips"><strong>${esc(t('Tips for today'))}</strong><ul>${d.tips.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
           <p class="reflect">💭 ${esc(d.reflection_question)}</p>
-        </details>`).join('')}</div>
-      <div class="panel tip"><i>${icon('sparkles')}</i><p>${esc(p.closing_tip)}</p></div>`;
-    $('planView').querySelectorAll('input[type=checkbox]').forEach(cb => cb.onchange = () => toggle(cb));
+        </details>`).join('')}
+        ${r.locked.map(n => `<div class="day locked"><span class="lk">${icon('lock')}</span><div><b>${esc(t('Day'))} ${esc(n)}</b><small>${esc(t('Finish every task of the previous day to unlock this day.'))}</small></div></div>`).join('')}
+      </div>
+      ${r.finished && r.closing_tip ? `<div class="panel tip"><i>${icon('sparkles')}</i><div><strong>${esc(t('You finished the whole plan. Well done!'))}</strong><p>${esc(r.closing_tip)}</p></div></div>` : ''}`;
     paintHistory();
   }
 
-  let saveTimer;
-  function toggle(cb) {
-    current.progress = { ...current.progress, [cb.dataset.k]: cb.checked };
-    const pct = Math.round(doneCount(current) / Math.max(1, totalTasks(current)) * 100);
-    $('pBar').style.width = pct + '%'; $('pTxt').textContent = pct + '%';
-    const id = current.id, progress = current.progress;
-    clearTimeout(saveTimer);
-    saveTimer = setTimeout(() => Auth.sb.from('plans').update({ progress }).eq('id', id), 500);
-  }
-
   // ---------- history ----------
+  async function loadHistory() {
+    const { data } = await Auth.sb.rpc('list_plans');
+    history = data || [];
+  }
   function paintHistory() {
     $('historyWrap').hidden = !history.length;
     $('history').innerHTML = history.map((r, i) => {
       const date = new Date(r.created_at).toLocaleDateString(App.lang === 'az' ? 'az-Latn-AZ' : App.lang, { day: 'numeric', month: 'short', year: 'numeric' });
       return `<div class="hist ${current && current.id === r.id ? 'on' : ''}">
-        <button type="button" class="hist-open" data-i="${i}"><strong>${esc((r.problems || []).join(' · ').slice(0, 90))}</strong><small>${esc(date)} · ${doneCount(r)}/${totalTasks(r)} ${esc(t('tasks done'))}</small></button>
+        <button type="button" class="hist-open" data-i="${i}"><strong>${esc((r.problems || []).join(' · ').slice(0, 90))}</strong><small>${esc(date)} · ${r.done}/${r.total} ${esc(t('tasks done'))}</small></button>
         <button type="button" class="x" data-del="${i}" aria-label="${esc(t('Delete'))}">${icon('trash')}</button></div>`;
     }).join('');
-    $('history').querySelectorAll('[data-i]').forEach(b => b.onclick = () => { show(history[+b.dataset.i]); $('planView').scrollIntoView({ behavior: 'smooth' }); });
+    $('history').querySelectorAll('[data-i]').forEach(b => b.onclick = async () => {
+      show(await fetchPlan(history[+b.dataset.i].id)); $('planView').scrollIntoView({ behavior: 'smooth' });
+    });
     $('history').querySelectorAll('[data-del]').forEach(b => b.onclick = async () => {
       const r = history[+b.dataset.del];
       if (!confirm(t('Delete this plan?'))) return;
@@ -157,9 +177,10 @@
     const user = await Auth.require();
     if (!user) return;
     hello();
-    const { data } = await Auth.sb.from('plans').select('*').order('created_at', { ascending: false }).limit(20);
-    history = data || [];
-    if (history.length) show(history[0]);
+    await loadHistory();
+    const want = new URLSearchParams(location.search).get('plan');
+    const id = want || (history[0] && history[0].id);
+    if (id) { try { show(await fetchPlan(id)); } catch (e) {} }
     paintHistory();
   })();
 })();

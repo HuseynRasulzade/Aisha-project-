@@ -17,13 +17,13 @@ Run `supabase/migrations/001_plans.sql` in the SQL editor (or `supabase db push`
 npm i -g supabase            # or: brew install supabase/tap/supabase
 supabase login
 supabase link --project-ref <YOUR_PROJECT_REF>
-supabase secrets set OPENAI_API_KEY=sk-...        # optional: OPENAI_MODEL=gpt-4o-mini DAILY_LIMIT=10
+supabase secrets set OPENAI_API_KEY=sk-...        # optional: OPENAI_MODEL=gpt-4o DAILY_LIMIT=10
 supabase functions deploy generate-plan
 ```
 
 ## 4. Run locally
 ```bash
-python3 -m http.server 8765
+python3 serve.py 8765
 ```
 Open http://localhost:8765/signup.html, create an account, then use **AI Plan**.
 

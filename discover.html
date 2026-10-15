@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f8f9d">
+  <title>Discover Myself — Sakina</title>
+  <meta name="description" content="Self-reflection exercises that build your personal growth map.">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <script src="gate.js?v=202610152020"></script>
+  <link rel="stylesheet" href="styles.css?v=202610152020">
+</head>
+<body data-page="discover">
+<div id="app-header"></div>
+
+<main>
+  <section class="page-head">
+    <p class="eyebrow">Discover myself</p>
+    <h1>Your personal growth map</h1>
+    <p class="muted">Seven short reflection exercises about your strengths, values, interests and communication. At the end you get a map built from your own answers.</p>
+  </section>
+
+  <div class="panel soft-note"><i data-icon="shield"></i><p>This is a tool for thinking about yourself. It is not a medical diagnosis and not a fixed verdict on your personality. People change, and your answers are saved only for you.</p></div>
+
+  <div class="tabs scroll" role="tablist" id="dTabs">
+    <button class="on" data-tab="questions"><i data-icon="pencil"></i>Know yourself</button>
+    <button data-tab="strengths"><i data-icon="award"></i>Strengths</button>
+    <button data-tab="values"><i data-icon="heart"></i>Values</button>
+    <button data-tab="interests"><i data-icon="compass"></i>Interests</button>
+    <button data-tab="comm"><i data-icon="chat"></i>Communication</button>
+    <button data-tab="goals"><i data-icon="target"></i>Goals</button>
+    <button data-tab="map"><i data-icon="chart"></i>My map</button>
+  </div>
+
+  <section class="tabpanel on" id="tab-questions"><div id="p-questions" data-dyn></div></section>
+  <section class="tabpanel" id="tab-strengths"><div id="p-strengths" data-dyn></div></section>
+  <section class="tabpanel" id="tab-values"><div id="p-values" data-dyn></div></section>
+  <section class="tabpanel" id="tab-interests"><div id="p-interests" data-dyn></div></section>
+  <section class="tabpanel" id="tab-comm"><div id="p-comm" data-dyn></div></section>
+  <section class="tabpanel" id="tab-goals"><div id="p-goals" data-dyn></div></section>
+  <section class="tabpanel" id="tab-map"><div id="p-map" data-dyn></div></section>
+  <p class="muted small center" id="saveState" aria-live="polite" data-dyn></p>
+</main>
+
+<div id="app-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js?v=202610152020"></script>
+<script src="i18n.js?v=202610152020"></script>
+<script src="i18n-pages.js?v=202610152020"></script>
+<script src="i18n-ai.js?v=202610152020"></script>
+<script src="common.js?v=202610152020"></script>
+<script src="auth.js?v=202610152020"></script>
+<script src="discover-data.js?v=202610152020"></script>
+<script src="discover.js?v=202610152045"></script>
+<script src="pages.js?v=202610152020"></script>
+</body>
+</html>

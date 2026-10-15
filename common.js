@@ -76,8 +76,9 @@ const App = (() => {
     ['home', 'Home', 'index.html', 'home'],
     ['grid', 'Dashboard', 'dashboard.html', 'dashboard'],
     ['book', 'Diary', 'diary.html', 'diary'],
-    ['brain', 'AI Plan', 'assistant.html', 'assistant'],
+    ['brain', 'AI', 'assistant.html', ['assistant', 'aisa']],
     ['users', 'Community', 'community.html', 'community'],
+    ['compass', 'Discover', 'discover.html', 'discover'],
     ['sparkles', 'Calm', 'calm.html', 'calm'],
     ['heartpulse', 'Health', 'health.html', 'health'],
     ['more', 'More', 'more.html', 'more'],
@@ -88,7 +89,7 @@ const App = (() => {
     const page = document.body.dataset.page;
     $('app-header').outerHTML = `<div class="lang-float"><select id="lang" aria-label="Language">${LANGS.map(l => `<option value="${l}">${l.toUpperCase()}</option>`).join('')}</select></div>`;
     $('app-footer').outerHTML = `
-      <nav class="bottomnav">${NAV.map(n => `<a href="${n[2]}" class="${n[3] === page ? 'on' : ''}"><i>${icon(n[0])}</i><span>${n[1]}</span></a>`).join('')}</nav>`;
+      <nav class="bottomnav">${NAV.map(n => `<a href="${n[2]}" class="${[].concat(n[3]).includes(page) ? 'on' : ''}"><i>${icon(n[0])}</i><span>${n[1]}</span></a>`).join('')}</nav>`;
     $('lang').onchange = e => setLang(e.target.value);
   }
 

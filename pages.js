@@ -39,6 +39,8 @@
   // ---------- Home: onboarding + tool grid ----------
   if ($('toolGrid')) {
     const tools = [
+      ['brain', 'AISA AI', 'Think through hard decisions.', 'aisa.html'],
+      ['compass', 'Discover myself', 'Strengths, values and a personal growth map.', 'discover.html'],
       ['chat', 'Chat', 'Talk any time, without judgement.', 'calm.html#chat'],
       ['book', 'Journal & mood', 'Emotion wheel and gentle insights.', 'diary.html'],
       ['wind', 'Breathing', '4-7-8 and box breathing.', 'calm.html#breathing'],
@@ -141,7 +143,7 @@
       const list = store.get('journal', []).slice().reverse();
       $('jList').innerHTML = list.length ? list.map(e =>
         `<article class="item"><div class="item-top"><span>${(MOODS.find(x => x[0] === e.m) || [0, ''])[1]} ${dateLabel(e.d, { day: 'numeric', month: 'long' })}</span>
-         <button class="x" data-del="${e.id}" aria-label="${t('Delete')}">${icon('trash')}</button></div><p>${esc(e.text)}</p></article>`).join('')
+         <button class="x" data-del="${e.id}" aria-label="${t('Delete')}">${icon('trash')}</button></div>${e.task ? `<span class="tag">${esc(e.task)}</span>` : ''}<p>${esc(e.text)}</p></article>`).join('')
         : `<p class="empty">${t('No entries yet.')}</p>`;
       $('jList').querySelectorAll('[data-del]').forEach(b => b.onclick = () => {
         store.set('journal', store.get('journal', []).filter(e => String(e.id) !== b.dataset.del)); paint();
